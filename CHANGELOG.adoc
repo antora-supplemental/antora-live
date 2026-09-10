@@ -1,6 +1,10 @@
 = Changelog
 :toc:
 
+== 2026-09-10 — Folder docs URLs
+
+* Point Explore the docs at the indexify path (`/antora-live/`). Drop the component start page as the first nav item so site-nav-tree does not nest the title twice.
+
 == 2026-09-10 — Design filing (P0)
 
 * Add product home and Antora component docs: Design, Data model, Phases.

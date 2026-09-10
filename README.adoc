@@ -18,7 +18,7 @@ ifdef::env-github[]
 <p align="center">
 DB-backed concurrent Antora authoring (design stage) — drafts and CRDT on AsciiDoc source, git publish into Antora generate.
 <br /><br />
-<a href="https://docs.antora-supplemental.org/antora-live/index.html"><strong>Explore the docs »</strong></a>
+<a href="https://docs.antora-supplemental.org/antora-live/"><strong>Explore the docs »</strong></a>
 <br />
 <a href="https://github.com/antora-supplemental/antora-live/issues">Report Bug</a>
 &middot;
@@ -39,7 +39,7 @@ image:https://img.shields.io/github/license/antora-supplemental/antora-live.svg?
 
 DB-backed concurrent Antora authoring (design stage) — drafts and CRDT on AsciiDoc source, git publish into Antora generate.
 
-https://docs.antora-supplemental.org/antora-live/index.html[*Explore the docs »*] ·
+https://docs.antora-supplemental.org/antora-live/[*Explore the docs »*] ·
 link:https://github.com/antora-supplemental/antora-live/issues[Report Bug] ·
 link:https://github.com/antora-supplemental/antora-live/issues[Request Feature]
 endif::[]
