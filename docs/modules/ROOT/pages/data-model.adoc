@@ -1,0 +1,78 @@
+= Data model
+:description: Antora-coordinate schema sketch for Live’s LibSQL working layer.
+:page-audience: Engineers implementing Live’s database and export bridge
+:page-usage-context: Antora Live design docs
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+Sketch only — no migrations shipped in P0.
+Storage target: **LibSQL / Turso** (same family as the extensions registry), not ephemeral `file:` SQLite on serverless hosts.
+
+== Entities
+
+=== Site (space)
+
+Maps to an Antora **playbook** plus a curated component set (same mindset as site-nav-tree `include` / `order`).
+
+Suggested fields:: `id`, `slug`, `playbook_ref`, `component_allowlist` (JSON), `created_at`
+
+=== Page
+
+Identity is Antora’s, not an opaque wiki id alone:
+
+* `component`
+* `version` (nullable / `~` for unversioned)
+* `module`
+* `family` — `page`, `partial`, `image`, `attachment`, `nav`, …
+* `path` — relative path within the family (e.g. `index.adoc`)
+
+Suggested fields:: Antora coordinates above, `site_id`, `title`, `source_text` (or pointer to CRDT doc), `updated_at`, `updated_by`
+
+Unique key:: `(site_id, component, version, module, family, path)`
+
+=== Revision / CRDT document
+
+* Working document: CRDT blob or op log (Yjs / Automerge — choose at P2) keyed by page id
+* Optional linear revision table for audit: `rev`, `author`, `summary`, `created_at`
+
+=== Published snapshot
+
+* `git_repo`, `git_ref`, `commit_sha`, `blob_sha` (optional), `exported_at`
+* Links a page (or site export batch) to the git artifact Antora will generate from
+
+=== Asset
+
+First-class rows for images, partials, and attachments with the same coordinate scheme as pages (`family` + `path`).
+Binary content may live in object storage with a content hash; the row still carries Antora path identity so includes and dirty-set stay path-keyed.
+
+=== Permission (stub tables now)
+
+* `principal` (user / team), `site_id`, `role` (`viewer` / `editor` / `admin`), optional page-scope overrides
+* Auth implementation is P3; schema should not block it
+
+== Export mapping
+
+When exporting to git, materialize:
+
+[source]
+----
+{start_path}/modules/{module}/{family}s/{path}
+----
+
+(with Antora’s usual `pages` / `partials` / `images` / `attachments` directory names).
+Preserve `page-*` attributes in AsciiDoc headers — page-context reads those at convert time.
+
+== What must not live only in HTML
+
+* Includes and xref targets
+* `page-*` classification attrs
+* Kroki / diagram **source**
+* Nav list structure (`nav.adoc`)
+* Extension-injected chrome (regenerated on publish)
+
+ifndef::page-context-active[]
+Audience role:: Engineers implementing Live’s database and export bridge
+Authors:: Ryan Johnson; Cursor agent on behalf of Ryan Johnson
+Last updated:: 2026-09-10
+endif::[]

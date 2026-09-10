@@ -1,0 +1,6 @@
+name: antora-live
+title: Antora Live
+version: ~
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc

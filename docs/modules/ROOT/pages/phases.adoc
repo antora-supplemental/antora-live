@@ -1,0 +1,52 @@
+= Phases
+:description: Delivery phases for Antora Live from design filing through preview fidelity.
+:page-audience: Maintainers sequencing Live implementation
+:page-usage-context: Antora Live design docs
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+== P0 — Design filing (current)
+
+* Product repo + component docs (this repository)
+* Hub canonical page `live-docs.adoc`
+* Cross-links from `antora-serve`, `antora-incremental`, and a Future note on `page-edit`
+* No runtime editor or database server
+
+== P1 — Single-user Live
+
+* DB page store with Antora coordinates
+* AsciiDoc source editor (single user)
+* Preview via materialize → `antora-serve` + incremental dirty set
+* Export commit to one content repository
+* Hub notify / regenerate for publish
+
+== P2 — Concurrent
+
+* CRDT on AsciiDoc source (Yjs or Automerge)
+* Presence and conflict UX
+* Still merge on source text; preview/publish unchanged in spirit
+
+== P3 — Product chrome
+
+* Auth and roles
+* Page create / move; nav editing
+* Configure `page-edit` Edit URL to target Live when desired
+
+== P4 — Fidelity
+
+* Richer preview catalog (closer to Facto publish)
+* Optional DB-backed Antora content source for private sites
+* Versioned-component workflows
+
+== Explicitly deferred
+
+* Confluence-parity WYSIWYG
+* Editing extension-owned DOM regions
+* Replacing git as publish source of truth for public hubs
+
+ifndef::page-context-active[]
+Audience role:: Maintainers sequencing Live implementation
+Authors:: Ryan Johnson; Cursor agent on behalf of Ryan Johnson
+Last updated:: 2026-09-10
+endif::[]

@@ -1,0 +1,29 @@
+{
+  "name": "@antora-supplemental/live",
+  "version": "0.0.0",
+  "private": true,
+  "description": "DB-backed concurrent Antora authoring (design stage): drafts, CRDT on AsciiDoc source, git publish.",
+  "license": "MIT",
+  "homepage": "https://github.com/antora-supplemental/antora-live",
+  "bugs": {
+    "url": "https://github.com/antora-supplemental/antora-live/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antora-supplemental/antora-live.git"
+  },
+  "keywords": [
+    "antora",
+    "collaboration",
+    "crdt",
+    "documentation",
+    "asciidoc"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node -e \"console.log('design-only: no runtime tests yet')\""
+  },
+  "packageManager": "pnpm@10.30.3"
+}

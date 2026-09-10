@@ -1,0 +1,7 @@
+= Changelog
+:toc:
+
+== 2026-09-10 — Design filing (P0)
+
+* Add product home and Antora component docs: Design, Data model, Phases.
+* Scope is architecture only — no runtime editor or DB server yet.

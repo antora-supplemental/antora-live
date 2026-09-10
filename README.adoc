@@ -1,0 +1,105 @@
+ifndef::env-github[:icons: font]
+:toc: preamble
+:toclevels: 2
+:sectanchors:
+endif::[]
+
+ifdef::env-github[]
+++++
+<a id="readme-top"></a>
+<div align="center">
+<a href="https://github.com/antora-supplemental/antora-live/graphs/contributors"><img src="https://img.shields.io/github/contributors/antora-supplemental/antora-live.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/antora-supplemental/antora-live/network/members"><img src="https://img.shields.io/github/forks/antora-supplemental/antora-live.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/antora-supplemental/antora-live/stargazers"><img src="https://img.shields.io/github/stars/antora-supplemental/antora-live.svg?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/antora-supplemental/antora-live/issues"><img src="https://img.shields.io/github/issues/antora-supplemental/antora-live.svg?style=for-the-badge" alt="Issues"></a>
+<a href="https://github.com/antora-supplemental/antora-live/blob/main/LICENSE"><img src="https://img.shields.io/github/license/antora-supplemental/antora-live.svg?style=for-the-badge" alt="License"></a>
+<br />
+<h3 align="center">@antora-supplemental/live</h3>
+<p align="center">
+DB-backed concurrent Antora authoring (design stage) — drafts and CRDT on AsciiDoc source, git publish into Antora generate.
+<br /><br />
+<a href="https://docs.antora-supplemental.org/antora-live/index.html"><strong>Explore the docs »</strong></a>
+<br />
+<a href="https://github.com/antora-supplemental/antora-live/issues">Report Bug</a>
+&middot;
+<a href="https://github.com/antora-supplemental/antora-live/issues">Request Feature</a>
+</p>
+</div>
+++++
+endif::[]
+
+ifndef::env-github[]
+image:https://img.shields.io/github/contributors/antora-supplemental/antora-live.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/antora-live/graphs/contributors]
+image:https://img.shields.io/github/forks/antora-supplemental/antora-live.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/antora-live/network/members]
+image:https://img.shields.io/github/stars/antora-supplemental/antora-live.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/antora-live/stargazers]
+image:https://img.shields.io/github/issues/antora-supplemental/antora-live.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/antora-live/issues]
+image:https://img.shields.io/github/license/antora-supplemental/antora-live.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/antora-live/blob/main/LICENSE]
+
+= @antora-supplemental/live
+
+DB-backed concurrent Antora authoring (design stage) — drafts and CRDT on AsciiDoc source, git publish into Antora generate.
+
+https://docs.antora-supplemental.org/antora-live/index.html[*Explore the docs »*] ·
+link:https://github.com/antora-supplemental/antora-live/issues[Report Bug] ·
+link:https://github.com/antora-supplemental/antora-live/issues[Request Feature]
+endif::[]
+
+== About The Project
+
+**Antora Live** is the product home for a Confluence-like authoring layer beside Antora’s static site generator: a database for drafts and concurrent edits, an AsciiDoc source editor, and export into git so `antora generate` (Facto stack) remains production truth.
+
+Status:: *Design filing (P0)* — architecture docs only. No runtime server or editor yet.
+
+Canonical short link for PRs:: https://docs.antora-supplemental.org/docs/live-docs/[Live docs] on the org hub.
+
+This is **not** https://github.com/antora-supplemental/page-edit[`page-edit`] (bake-time VCS View | Edit links) and **not** a fork of Antora core.
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== Docs in this repo
+
+| Page | Role |
+|---|---|
+| `docs/modules/ROOT/pages/design.adoc` | Problem, non-goals, tiers, extensions |
+| `docs/modules/ROOT/pages/data-model.adoc` | LibSQL schema sketch (Antora coordinates) |
+| `docs/modules/ROOT/pages/phases.adoc` | P0–P4 delivery |
+
+Wired into https://github.com/antora-supplemental/docs[`antora-supplemental/docs`] as component `antora-live`.
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== Built With
+
+* *Docs* — AsciiDoc, Antora component layout
+* *Planned runtime* — LibSQL/Turso, CRDT on AsciiDoc source, Node 18+
+* *Preview / publish bridge* — `antora-serve`, `antora-incremental`, git export, hub `repository_dispatch`
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== Changelog
+
+See link:CHANGELOG.adoc[CHANGELOG.adoc].
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== License
+
+Distributed under the MIT License. See `LICENSE`.
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== Contact
+
+Project:: https://github.com/antora-supplemental/antora-live
+
+Org:: https://github.com/antora-supplemental

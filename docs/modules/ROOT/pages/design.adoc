@@ -1,0 +1,85 @@
+= Design
+:description: Architecture for Antora Live — concurrent authoring beside static Antora generate.
+:page-audience: Maintainers designing Live’s authoring and publish bridge
+:page-usage-context: Antora Live design docs
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+This page is the long-form design for Antora Live.
+Keep GitHub PR bodies short — link the hub page https://docs.antora-supplemental.org/docs/live-docs/[Live docs] or this component.
+
+== Problem
+
+Teams want Confluence-like **concurrent editing** and a **page editor**, while still publishing with Antora’s multi-repo catalog, Facto extensions, and static HTML.
+
+Antora alone cannot do that: it aggregates git sources, runs extensions, converts AsciiDoc, and composes UI into artifacts. There is no server-side page document store and no multiplayer session.
+
+== Non-goals (v1)
+
+* Replace or fork Antora core
+* WYSIWYG fidelity over includes, extension-injected chrome, or published HTML
+* Real-time shared HTML that matches production Facto output keystroke-by-keystroke
+* HTML → AsciiDoc round-trip (published DOM loses includes, `page-*` attrs, Kroki source, pass-throughs, page-context / page-edit injection)
+* Polling remotes for content (keep push-notify from Site rebuild v1)
+
+== Architecture
+
+[source]
+----
+Authoring                          Publish
+─────────                          ───────
+AsciiDoc editor (CRDT)             Content git repos
+        │                                  │
+        ▼                                  ▼
+LibSQL drafts / ops / presence     Antora generate (Facto)
+        │                                  │
+        ├──► serve + incremental preview   ▼
+        │                          Static site (Pages)
+        └──► commit or PR export ──┘
+----
+
+page-edit’s Edit URL may later point at Live instead of (or in addition to) the forge — that is a wiring change on `page-edit`, not ownership of Live inside that package.
+
+== Why bake-time Antora makes this hard
+
+* *Flow* — aggregate git → catalog → Antora extensions (nav-tree, aliases, Lunr…) → Asciidoctor (`include` / `xref` / Kroki / page-context) → Handlebars UI → static HTML.
+* *Extension-owned regions* — page-context lead/footer and page-edit Source row are generated; Live must not treat them as editable body.
+* *Cross-file dirty graph* — one partial or nav change can invalidate many pages; concurrency and preview need path-keyed deps (incremental manifest), not in-browser HTML merge.
+* *Coordinates* — `editUrl` / `origin`, `partial$` paths, `.antora-deps.json`, serve watch, and hub `repository_dispatch` assume cloneable repos and Antora path families. DB rows must carry **component + version + module + family + path** and still export to git for publish.
+* *Spaces* — multi-repo hubs and versioned components do not map 1:1 to flat Confluence spaces.
+
+== Preview fidelity tiers
+
+. *Edit buffer* — Asciidoctor-only convert of one page (fast; wrong for xrefs/includes across the catalog).
+. *Workspace preview* — materialize dirty files to a worktree → `antora-serve` + incremental dirty set (author-good-enough).
+. *Publish* — export to git → hub `repository_dispatch` → full or incremental generate with the Facto stack (production truth).
+
+== Extension story
+
+Classify Facto / hub extension behavior as **preview-safe**, **publish-only**, or **needs a Live adapter**:
+
+| Concern | Notes |
+|---|---|
+| page-context | Source of truth = `page-*` attrs in `.adoc`; injected HTML is not authored body |
+| page-edit | Needs git `editUrl` after export; Live Edit URL is a future config |
+| site-nav-tree | Forest `include` allowlist lives in playbook YAML; every page embeds the forest |
+| Kroki / math | Network / KaTeX at generate or UI compose — not live-editable in published HTML |
+| Lunr / keyword pages | Site-wide; refresh on publish |
+
+Long-term optional: an Antora **custom content source** that reads published DB snapshots for private DB-primary sites. Public hubs keep **git export** as the primary bridge.
+
+== Related building blocks
+
+* https://docs.antora-supplemental.org/docs/site-rebuild/[Site rebuild v1/v2] — static generate; runtime docs app = different product
+* https://github.com/antora-supplemental/antora-serve[`antora-serve`] — local generate + watch + reload
+* https://github.com/antora-supplemental/antora-incremental[`antora-incremental`] — dependency manifest + dirty set
+* https://github.com/antora-supplemental/page-edit[`page-edit`] — forge View \| Edit only today
+* https://github.com/antora-supplemental/antora-extensions-registry[`antora-extensions-registry`] — Drizzle/Turso precedent (catalog metadata, not pages)
+* https://github.com/antora-supplemental/antora-search-chat[`antora-search-chat`] — assist runtime; do not conflate with authoring
+
+ifndef::page-context-active[]
+Audience role:: Maintainers designing Live’s authoring and publish bridge
+Authors:: Ryan Johnson; Cursor agent on behalf of Ryan Johnson
+Last updated:: 2026-09-10
+endif::[]

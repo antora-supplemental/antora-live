@@ -1,0 +1,11 @@
+*
+!.gitignore
+!LICENSE
+!README.adoc
+!CHANGELOG.adoc
+!AGENTS.md
+!package.json
+!docs/
+!docs/**
+docs/**/build/
+docs/**/.cache/

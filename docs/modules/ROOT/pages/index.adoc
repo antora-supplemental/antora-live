@@ -1,0 +1,37 @@
+= Antora Live
+:description: DB-backed concurrent Antora authoring — product overview (design stage).
+:page-audience: Docs platform maintainers and hub authors evaluating multiplayer AsciiDoc workflows
+:page-usage-context: Org docs hub component for Antora Live (design filing)
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+Antora Live is a **planned** product: a database-backed working layer for concurrent AsciiDoc editing, with publish back into Antora’s static generate pipeline.
+
+It is **not** a rewrite of Antora core and **not** the same package as https://github.com/antora-supplemental/page-edit[`page-edit`] (bake-time VCS View | Edit links).
+
+== Why a separate product
+
+Antora is a **batch catalog compiler**. Includes, xrefs, nav, aliases, and many extensions resolve at **generate** time into static HTML.
+A Confluence-style multiplayer experience needs a different runtime for drafts and presence — then a bridge to git + `antora generate` for production truth.
+
+Canonical short write-up for PRs:: https://docs.antora-supplemental.org/docs/live-docs/[Live docs] on the org hub (also xrefable as `docs:ROOT:live-docs.adoc` when building the hub).
+
+== Locked model
+
+* *Publish / generate* — git content sources remain the source of truth for public static sites and the Facto stack (Lunr, Kroki, page-context, site-nav-tree, aliases).
+* *Authoring* — LibSQL/Turso holds drafts, CRDT operations, presence, and (later) permissions.
+* *Editor* — AsciiDoc **source** plus live preview first; concurrent merges happen on source text, not published HTML.
+* *Bridge* — export commits or PRs into content repos; preview reuses https://github.com/antora-supplemental/antora-serve[`antora-serve`] and https://github.com/antora-supplemental/antora-incremental[`antora-incremental`].
+
+== Read next
+
+* xref:design.adoc[Design] — problem, non-goals, pipeline tiers, extensions
+* xref:data-model.adoc[Data model] — Antora coordinates in the DB
+* xref:phases.adoc[Phases] — P0 design filing through P4 fidelity
+
+ifndef::page-context-active[]
+Audience role:: Docs platform maintainers and hub authors evaluating multiplayer AsciiDoc workflows
+Authors:: Ryan Johnson; Cursor agent on behalf of Ryan Johnson
+Last updated:: 2026-09-10
+endif::[]
