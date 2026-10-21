@@ -50,7 +50,7 @@ endif::[]
 
 Status:: *Design filing (P0)* — architecture docs only. No runtime server or editor yet.
 
-Canonical short link for PRs:: https://docs.antora-supplemental.org/docs/live-docs/[Live docs] on the org hub.
+Canonical short link for PRs:: https://docs.antora-supplemental.org/home/live-docs/[Live docs] on the org hub.
 
 This is **not** https://github.com/antora-supplemental/page-edit[`page-edit`] (bake-time VCS View | Edit links) and **not** a fork of Antora core.
 

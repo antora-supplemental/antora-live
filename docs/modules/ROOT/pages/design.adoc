@@ -7,7 +7,7 @@
 :page-last-edited: 2026-09-10
 
 This page is the long-form design for Antora Live.
-Keep GitHub PR bodies short — link the hub page https://docs.antora-supplemental.org/docs/live-docs/[Live docs] or this component.
+Keep GitHub PR bodies short — link the hub page https://docs.antora-supplemental.org/home/live-docs/[Live docs] or this component.
 
 == Problem
 
@@ -71,7 +71,7 @@ Long-term optional: an Antora **custom content source** that reads published DB 
 
 == Related building blocks
 
-* https://docs.antora-supplemental.org/docs/site-rebuild/[Site rebuild v1/v2] — static generate; runtime docs app = different product
+* https://docs.antora-supplemental.org/home/site-rebuild/[Site rebuild v1/v2] — static generate; runtime docs app = different product
 * https://github.com/antora-supplemental/antora-serve[`antora-serve`] — local generate + watch + reload
 * https://github.com/antora-supplemental/antora-incremental[`antora-incremental`] — dependency manifest + dirty set
 * https://github.com/antora-supplemental/page-edit[`page-edit`] — forge View \| Edit only today

@@ -1,6 +1,10 @@
 = Changelog
 :toc:
 
+== 2026-10-21 — Hub home URL
+
+* Links to the org hub use `/home/live-docs/` (hub component renamed from `docs` to `home`; old `/docs/` URLs redirect).
+
 == 2026-09-10 — Folder docs URLs
 
 * Point Explore the docs at the indexify path (`/antora-live/`). Drop the component start page as the first nav item so site-nav-tree does not nest the title twice.

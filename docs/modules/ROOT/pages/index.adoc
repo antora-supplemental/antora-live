@@ -15,7 +15,7 @@ It is **not** a rewrite of Antora core and **not** the same package as https://g
 Antora is a **batch catalog compiler**. Includes, xrefs, nav, aliases, and many extensions resolve at **generate** time into static HTML.
 A Confluence-style multiplayer experience needs a different runtime for drafts and presence — then a bridge to git + `antora generate` for production truth.
 
-Canonical short write-up for PRs:: https://docs.antora-supplemental.org/docs/live-docs/[Live docs] on the org hub (also xrefable as `docs:ROOT:live-docs.adoc` when building the hub).
+Canonical short write-up for PRs:: https://docs.antora-supplemental.org/home/live-docs/[Live docs] on the org hub (also xrefable as `home:ROOT:live-docs.adoc` when building the hub).
 
 == Locked model
 
